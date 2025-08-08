@@ -11,17 +11,16 @@
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
 
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/ai2_website_top.png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
@@ -34,26 +33,43 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-2 publication-title">Hawkeye: Model Collaboration for Efficient Reasoning</h1>
-          <div class="is-size-5 publication-authors">
+          <div class="is-size-8 publication-authors">
             <span class="author-block">
-              <a href="#">Jianshu She</a><sup>1</sup>,</span>
+              <a href="#">Jianshu She</a><sup>1</sup> <sup>*</sup>,</span>
             <span class="author-block">
-              <a href="#">Zhuohao Li</a><sup>2</sup>,</span>
+              <a href="#">Zhuohao Li</a><sup>2</sup> <sup>*</sup>,</span>
             <span class="author-block">
-              <a href="#">Zhemin Huang</a><sup>1</sup>,</span>
+              <a href="#">Zhemin Huang</a><sup>3</sup>,</span>
             <span class="author-block">
-              <a href="#">Qi Li</a><sup>1</sup>,</span>
+              <a href="#">Qi Li</a><sup>4</sup>,</span>
             <span class="author-block">
-              <a href="#">Peiran Xu</a><sup>1</sup>,</span>
+              <a href="#">Peiran Xu</a><sup>2</sup>,</span>
             <span class="author-block">
               <a href="#">Haonan Li</a><sup>1</sup>,</span>
             <span class="author-block">
               <a href="#">Qirong Ho</a><sup>1</sup></span>
           </div>
 
-          <div class="is-size-5 publication-authors">
+          <div class="is-size-8 publication-authors">
             <span class="author-block"><sup>1</sup>MBZUAI</span>,
-            <span class="author-block"><sup>2</sup>UCLA</span>
+            <span class="author-block"><sup>2</sup>UCLA</span>,
+            <span class="author-block"><sup>3</sup>Stanford University</span>,
+            <span class="author-block"><sup>4</sup>Independent Researcher</span>
+            <br>
+            <span class="author-block"><sup>*</sup>Equal Contribution</span>
+          </div>
+
+          <!-- Institution Logos -->
+          <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin: 20px 0;">
+            <div style="display: flex; align-items: center; justify-content: center; height: 80px;">
+              <img src="./static/images/mbzuai.png" style="max-width: 180px; max-height: 80px; height: auto; object-fit: contain;">
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; height: 80px;">
+              <img src="./static/images/ucla.png" style="max-width: 150px; max-height: 80px; height: auto; object-fit: contain;">
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; height: 100px;">
+              <img src="./static/images/stf.png" style="max-width: 200px; max-height: 200px; height: auto; object-fit: contain; transform: translateY(14px);">
+            </div>
           </div>
 
           <div class="column has-text-centered">
@@ -99,7 +115,7 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="./figure/methodology.png" style="max-width: 80%; align-items: center; margin: auto;">
+      <img src="./figure/example3.png" style="max-width: 100%; align-items: center; margin: auto;">
       <h2 class="subtitle has-text-centered">
         Hawkeye introduces model collaboration, where a large model produces concise instructions to guide a lightweight model in response generation.
       </h2>
@@ -115,10 +131,13 @@
         <h3 class="title is-4">Abstract</h3>
         <div class="content has-text-justified">
           <p>
-            Chain-of-Thought (CoT) reasoning has demonstrated remarkable effectiveness in enhancing the reasoning abilities of large language models (LLMs). However, its efficiency remains a challenge due to the generation of excessive intermediate reasoning tokens, which introduce semantic redundancy and overly detailed reasoning steps.
+            Chain-of-Thought (CoT) reasoning has demonstrated remarkable effectiveness in enhancing the reasoning abilities of large language models (LLMs). However, its efficiency remains a challenge due to the generation of excessive intermediate reasoning tokens, which introduce semantic redundancy and overly detailed reasoning steps. Moreover, computational expense and latency are significant concerns, as the cost scales with the number of output tokens, including those intermediate steps.
             <br>
             <br>
-            <strong>Hawkeye</strong> is an efficient reasoning framework with <strong>Model Collaboration</strong>, where a large model produces concise instructions to guide a lightweight model in response preparation and generation. Hawkeye quantifies redundancy in LRM and distills high-density information via RLHF, achieving up to 67.6% reduction in reasoning tokens while maintaining comparable response quality.
+            In this work, we observe that most CoT tokens are unnecessary, and retaining only a small portion of them is sufficient for producing high-quality responses. Inspired by this, we propose <strong>Hawkeye</strong>, a novel post-training and inference framework where a large model produces concise CoT instructions to guide a smaller model in response generation. Hawkeye quantifies redundancy in CoT reasoning and distills high-density information via reinforcement learning. By leveraging these concise CoTs, Hawkeye is able to expand responses while reducing token usage and computational cost significantly.
+            <br>
+            <br>
+            Our evaluation shows that Hawkeye can achieve comparable response quality using only 35% of the full CoTs, while improving clarity, coherence, and conciseness by approximately 10%. Furthermore, Hawkeye can accelerate end-to-end reasoning by up to 3.4× on complex math tasks while reducing inference cost by up to 60%.
           </p>
         </div>
       </div>
@@ -129,36 +148,33 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <div class="content has-text-justified">
-            <h3 class="title is-4">Key Features</h3>
+            <h3 class="title is-4">Introduction</h3>
             <p>
-              <ul>
-                <li><strong>Efficiency</strong>: Achieves up to 67.6% reduction in reasoning tokens</li>
-                <li><strong>Cost Reduction</strong>: Reduces serving cost by up to 62%</li>
-                <li><strong>Speed</strong>: Accelerates end-to-end reasoning by up to 3.4×</li>
-                <li><strong>Quality</strong>: Maintains comparable response quality while improving clarity and coherence</li>
-                <li><strong>Flexibility</strong>: Supports various model combinations and system prompts</li>
-              </ul>
+              The emergence of reasoning-capable large language models (LLMs) has recently made headlines. Equipped with Chain-of-Thought (CoT) reasoning, these models "think" by producing lengthy internal reasoning traces before generating a final response. This reasoning paradigm decomposes complex questions and applies multiple strategies to verify and refine answers, mimicking human-like problem solving. It has proven particularly effective for tasks that require fine-grained, step-by-step logical synthesis, such as mathematics and code generation.
             </p>
+            <p>
+              However, such test-time compute scaling is inefficient, as a large portion of the generated "thinking" tokens is redundant. While long CoTs can improve reasoning quality, generating them during inference introduces significant overhead. For example, the OpenAI o1 model uses up to 40K tokens, whereas GPT-4o averages around 4K tokens for the same query, leading to a 10× increase in KV cache memory usage.
+            </p>
+
+            <h3 class="title is-4">Key Features</h3>
+            <ul>
+              <li><strong>Efficiency</strong>: Achieves up to 67.6% reduction in reasoning tokens</li>
+              <li><strong>Cost Reduction</strong>: Reduces serving cost by up to 62%</li>
+              <li><strong>Speed</strong>: Accelerates end-to-end reasoning by up to 3.4×</li>
+              <li><strong>Quality</strong>: Maintains comparable response quality while improving clarity and coherence</li>
+              <li><strong>Flexibility</strong>: Supports various model combinations and system prompts</li>
+            </ul>
 
             <h3 class="title is-4">Architecture</h3>
             <p>
-              Hawkeye introduces <strong>model collaboration</strong>, wherein a powerful model generates concise reasoning instructions, and small models expand them into human-readable responses.
+              Hawkeye introduces <strong>model collaboration</strong>, wherein a powerful model generates concise reasoning instructions, and small models expand them into human-readable responses. The core idea behind Hawkeye's post-training is to minimize redundancy in intermediate reasoning tokens and accelerate reasoning, thereby reducing cost while enhancing CoT quality.
             </p>
             <img src="./figure/methodology.png" style="max-width: 70%; align-items: center; margin: auto;">
-
-            <h3 class="title is-4">Performance Results</h3>
             <p>
-              Hawkeye achieves comparable accuracy to baseline models while significantly reducing computational cost:
+              During inference, Hawkeye introduces a novel paradigm in which a large language model (LLM) guides smaller language models (SLMs) to generate answers based on distilled CoTs. Hawkeye achieves nearly a 50% reduction in cost and significantly faster inference without sacrificing response quality.
             </p>
-            <img src="./figure/acc_comp.png" style="max-width: 80%; align-items: center; margin: auto;">
 
-            <h3 class="title is-4">Cost Efficiency</h3>
-            <p>
-              Hawkeye reduces inference cost by up to 60% while maintaining performance. Our evaluation shows that Hawkeye can achieve comparable response quality using only 35% of the full CoTs:
-            </p>
-            <img src="./figure/comparasion.png" style="max-width: 80%; align-items: center; margin: auto;">
-
-            <h3 class="title is-4">Methodology</h3>
+            <h3 class="title is-4">CoT Redundancy Analysis</h3>
             <p>
               We observe that CoT reasoning often contains substantial redundancy due to:
             </p>
@@ -168,10 +184,13 @@
               <li><strong>Overly fine-grained steps</strong></li>
             </ul>
             <img src="./figure/redundancy.png" style="max-width: 70%; align-items: center; margin: auto;">
+            <p>
+              To examine redundancy in Chain-of-Thought reasoning, smaller models were guided by larger models to generate CoTs for GSM8K. The CoTs were refined via LLM-assisted feedback by removing repeated, filler-like, and overly fine-grained tokens. Results indicate that 60%–80% of CoT tokens are redundant across most models.
+            </p>
 
             <h3 class="title is-4">GRPO Training</h3>
             <p>
-              Hawkeye employs GRPO (Group Relative Policy Optimization) to fine-tune models for compressed CoT generation:
+              Hawkeye employs GRPO (Group Relative Policy Optimization) to fine-tune models for compressed CoT generation. We observe that CoT density achieves an optimal trade-off between compression rate and performance when the compression rate ranges from 0.6 to 0.8 relative to the original.
             </p>
             <div style="display: flex; justify-content: center; gap: 20px;">
               <img src="./figure/GRPO.png" style="max-width: 45%;">
@@ -190,6 +209,23 @@
               <li><code>len(c_orig)</code>: Token count of original CoT</li>
               <li><code>λ</code>: Length penalty weight</li>
             </ul>
+
+            <h3 class="title is-4">Performance Results</h3>
+            <p>
+              Hawkeye achieves comparable accuracy to baseline models while significantly reducing computational cost:
+            </p>
+            <img src="./figure/acc_comp.png" style="max-width: 80%; align-items: center; margin: auto;">
+
+            <h3 class="title is-4">System Latency</h3>
+            <p>
+              Under a concurrency level of 10, Hawkeye demonstrates inference speedups of up to 1.6×, 2.1×, and 2.5× relative to the baseline on GSM8K, MATH500, and MATH, respectively, while utilizing only 55.7%, 41.1%, and 38.3% of the original total token counts. When the concurrency is increased to 100, the speedup factors further improve to 1.8×, 3.4×, and 2.8×.
+            </p>
+            <img src="./figure/comparasion.png" style="max-width: 80%; align-items: center; margin: auto;">
+
+            <h3 class="title is-4">Cost Efficiency</h3>
+            <p>
+              Due to the output token count saving, Hawkeye costs less up to 98.40% and 59.09% than OpenAI-o1 and DeepSeek-R1. Our evaluation shows that Hawkeye can achieve comparable response quality using only 35% of the full CoTs.
+            </p>
 
             <h3 class="title is-4">Evaluation Results</h3>
             <p>
@@ -243,6 +279,14 @@
                 </tr>
               </tbody>
             </table>
+
+            <h3 class="title is-4">Conclusion</h3>
+            <p>
+              In this work, we introduce Hawkeye, a novel paradigm for efficient reasoning via model collaboration. Hawkeye enables a large model to generate concise and informative Chain-of-Thought (CoT) instructions, which are subsequently expanded by a smaller model to produce coherent and accurate responses. This collaborative reasoning framework significantly reduces redundancy in intermediate reasoning steps.
+            </p>
+            <p>
+              Extensive evaluations across multiple reasoning benchmarks (e.g., GSM8K, MATH500, AIME) demonstrate that Hawkeye achieves comparable or even improved response quality, while reducing reasoning token usage by <strong>50%--70%</strong> and accelerating inference by up to <strong>3×</strong>. These results suggest that combining instruction distillation with small-model generation offers a promising pathway toward scalable and cost-effective reasoning systems without sacrificing performance.
+            </p>
           </div>
         </div>
       </div>
@@ -266,18 +310,27 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="publication-links">
-        <span class="link-block">
-          <img src="./static/images/ai2-logo-header.png" style="max-width: 20%; align-items: center; margin: auto;">
-        </span>
-        <br>
-        <span class="link-block">
-          <img src="./static/images/aristo-logo-header.png" style="max-width: 15%; align-items: center; margin: auto;">
-        </span>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin: 20px 0;">
+          <!-- <div style="display: flex; align-items: center; justify-content: center; height: 80px;">
+            <img src="./static/images/mbzuai.png" style="max-width: 180px; max-height: 80px; height: auto; object-fit: contain;">
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center; height: 80px;">
+            <img src="./static/images/ucla.png" style="max-width: 150px; max-height: 80px; height: auto; object-fit: contain;">
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center; height: 100px;">
+            <img src="./static/images/stf.png" style="max-width: 200px; max-height: 200px; height: auto; object-fit: contain; transform: translateY(14px);">
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column has-text-centered">
+        <p style="color: #666; font-size: 14px; margin-top: 20px;">
+          © 2025 Hawkeye Project. All rights reserved.
+        </p>
       </div>
     </div>
     <br>
-    <p><center><a href="https://allenai.org/">Allen Institute for AI</a> - all rights reserved.<br>
-      The website template is borrowed from <a href="https://nerfies.github.io/">here</a>.</center></p>
   </div>
 </footer>
 

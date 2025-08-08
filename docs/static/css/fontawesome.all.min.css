@@ -12,14 +12,43 @@
   font-weight: 400;
 }
 
+/* PDF icon */
 .fa-file-pdf:before {
   content: "\f1c1";
 }
 
+/* GitHub icon */
 .fa-github:before {
   content: "\f09b";
 }
 
+/* Brain/AI icon for HuggingFace */
 .fa-brain:before {
   content: "\f5dc";
+}
+
+/* Alternative icons for better representation */
+.fa-file-alt:before {
+  content: "\f15c";
+}
+
+.fa-code:before {
+  content: "\f121";
+}
+
+.fa-robot:before {
+  content: "\f544";
+}
+
+/* Additional icons that might be useful */
+.fa-external-link-alt:before {
+  content: "\f35d";
+}
+
+.fa-download:before {
+  content: "\f019";
+}
+
+.fa-play:before {
+  content: "\f04b";
 } 

@@ -19,20 +19,31 @@ body {
 
 .publication-authors {
   margin-bottom: 1rem;
+  font-size: 1.2rem; /* 增加作者字体大小 */
 }
 
 .author-block {
   display: inline-block;
   margin-right: 0.5rem;
+  font-size: 1.1rem; /* 增加作者名字字体大小 */
 }
 
 .author-block a {
   color: #3498db;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .author-block a:hover {
   text-decoration: underline;
+}
+
+/* 机构名称样式 */
+.institution-block {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 1.1rem; /* 增加机构字体大小 */
+  font-weight: 500;
 }
 
 .publication-links {
@@ -53,6 +64,7 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: background-color 0.3s;
+  font-size: 1rem; /* 增加按钮字体大小 */
 }
 
 .external-link:hover {
@@ -134,12 +146,29 @@ body {
 
 .footer img {
   margin: 0.5rem;
+  transition: opacity 0.3s;
+}
+
+.footer img:hover {
+  opacity: 0.8;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   .publication-title {
     font-size: 2rem;
+  }
+  
+  .publication-authors {
+    font-size: 1rem;
+  }
+  
+  .author-block {
+    font-size: 0.95rem;
+  }
+  
+  .institution-block {
+    font-size: 0.95rem;
   }
   
   .content img {
@@ -149,5 +178,15 @@ body {
   .link-block {
     display: block;
     margin: 0.5rem 0;
+  }
+  
+  /* Footer logos responsive */
+  .footer .publication-links > div {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .footer .publication-links img {
+    max-width: 150px !important;
   }
 } 
