@@ -1,92 +1,160 @@
-# Hawkeye: Model Collaboration for Efficient Reasoning (COLM'25)
+# Hawkeye: Model Collaboration for Efficient Reasoning
+
+[![Paper](https://img.shields.io/badge/Paper-PDF-red)](https://arxiv.org/abs/2504.00424)
+[![Code](https://img.shields.io/badge/Code-GitHub-blue)](https://github.com/Jianshu1only/Efficient_CoT)
+[![Model](https://img.shields.io/badge/Model-HuggingFace-green)](https://huggingface.co/Jianshu001/Efficient_CoT_DeepSeek-R1-Distill-Qwen-7B)
+
+## 📖 Overview
+
+**Hawkeye** is an efficient reasoning framework with **Model Collaboration**, where a large model produces concise instructions to guide a lightweight model in response preparation and generation. Hawkeye quantifies redundancy in LRM and distills high-density information via RLHF.
+
+![Methodology](Efficient_Chain_of_Thought/figure/methodology.png)
+
+![Example](Efficient_Chain_of_Thought/figure/example3.png)
+
+## 🎯 Key Features
+
+- **🚀 Efficiency**: Achieves up to 67.6% reduction in reasoning tokens
+- **💰 Cost Reduction**: Reduces serving cost by up to 62%
+- **⚡ Speed**: Accelerates end-to-end reasoning by up to 3.4×
+- **🎯 Quality**: Maintains comparable response quality while improving clarity and coherence
+- **🔧 Flexibility**: Supports various model combinations and system prompts
 
 
-This is the repository for the **Efficient_CoT** project.  
-It aims to provide efficient and structured implementations for chain-of-thought reasoning in AI models.
+## 🚀 Quick Start
 
-## Evaluation Task (Accuracy/Responese Length/Throughtput)
+### Installation
+
+```bash
+git clone https://github.com/Jianshu1only/Efficient_CoT.git
+cd Efficient_CoT
+pip install -r requirements.txt
+```
+
+### Basic Usage
+
+```python
+from hawkeye import Hawkeye
+
+# Initialize Hawkeye
+hawkeye = Hawkeye(
+    large_model="DeepSeek-R1-Distill-Qwen-7B",
+    small_model="Qwen2.5-0.5B-Instruct"
+)
+
+# Generate response
+response = hawkeye.generate(
+    question="What is the sum of the first 100 natural numbers?",
+    max_tokens=512
+)
+```
+
+### Evaluation
+
+```bash
+# Run GSM8K evaluation
+python bench/gsm8k_evaluate_cot.py --model_path your_model_path --test_file gsm8k_cot.jsonl
+
+# Run MATH evaluation
+python bench/math_evaluate_cot.py --model_path your_model_path --test_file math_cot.jsonl
+```
+
+## 📁 Project Structure
+
+```
+Hawkeye/
+├── bench/                    # Benchmark evaluation scripts
+│   ├── gsm8k_evaluate_cot.py
+│   ├── math_evaluate_cot.py
+│   └── results/             # Evaluation results
+├── evaluation/              # Model evaluation utilities
+├── finetune/               # Fine-tuning scripts
+├── model/                  # Model configurations
+├── docs/                   # Documentation and website
+```
+
+## 🏗️ Architecture
+
+Hawkeye introduces **model collaboration**, wherein a powerful model generates concise reasoning instructions, and small models expand them into human-readable responses.
+
+### Two-Phase Reasoning Workflow
+
+1. **Phase 1**: Large Language Model (LLM) constructs core logical framework
+2. **Phase 2**: Smaller Language Model (SLM) leverages structured outline to generate comprehensive responses
 
 
-| Task              | Model                                      | Accuracy(%) | Response Length | Throughput |
-|------------------|--------------------------------------------|----------|----------------|------------|
-| GSM8K           | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |     85.65 $\pm$ 0.63  |      477.98 $\pm$ 0.89(Tokens)          |          |
-|                | Efficient CoT                              |     82.11 $\pm$ 0.48    |   413.42 $\pm$ 2.19(Tokens)        |            |
-| MATH-500       | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |          |                |            |
-|                | Efficient CoT                              |          |                |            |
-| MQA            | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |          |                |            |
-|                | Efficient CoT                              |          |                |            |
-| GPQA Diamond   | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |   38.72 $\pm$ 3.56 |        1975.19 $\pm$ 8.90 (Tokens)        |            |
-|                | Efficient CoT                              |  39.23 $\pm$ 3.10    |       2006.30 $\pm$ 2.23 (Tokens)        |            |
-| AIME 2024      | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |          |                |            |
-|                | Efficient CoT                                    |          |                |            |
-| MATH           | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |     91.47     |         751.5(Tokens)       |            |
-|                | Efficient CoT                                  |     87.45     |       208.33(Tokens)         |            |
+## 📊 Performance Results
+
+### Accuracy Comparison
+
+Hawkeye achieves comparable accuracy to baseline models while significantly reducing computational cost:
+
+![Accuracy Comparison](Efficient_Chain_of_Thought/figure/acc_comp.png)
+
+### Cost Efficiency
+
+Hawkeye reduces inference cost by up to 60% while maintaining performance. Our evaluation shows that Hawkeye can achieve comparable response quality using only 35% of the full CoTs
+
+![Performance](Efficient_Chain_of_Thought/figure/comparasion.png)
+
+## 🔬 Methodology
+
+### Overthink
+
+We observe that CoT reasoning often contains substantial redundancy due to:
+1. **Repeated hints**
+2. **Filler phrases** (e.g., "Well," "Let me double-check")
+3. **Overly fine-grained steps**
+
+![Redundancy Analysis](Efficient_Chain_of_Thought/figure/redundancy.png)
+
+### GRPO
+
+Hawkeye employs GRPO (Group Relative Policy Optimization) to fine-tune models for compressed CoT generation:
+
+![GRPO Training](Efficient_Chain_of_Thought/figure/GRPO.png)
+
+The reward function is designed as:
+```
+R = EM(â, a) - λ × max(0, len(c) - 0.3 × len(c_orig))²
+```
+
+Where:
+- `EM(â, a)`: Exact match score between generated and ground truth answers
+- `len(c)`: Token count of generated CoT
+- `len(c_orig)`: Token count of original CoT
+- `λ`: Length penalty weight
+
+## 📈 Evaluation Results
+
+### Multi-Dataset Performance
+
+| Task | Model | Accuracy(%) | Response Length (Tokens) |
+|------|-------|-------------|-------------------------|
+| GSM8K | DeepSeek-R1-Distill-Qwen-7B | 85.65 ± 0.63 | 477.98 ± 0.89 |
+| GSM8K | Hawkeye | 82.11 ± 0.48 | 413.42 ± 2.19 |
+| GPQA Diamond | DeepSeek-R1-Distill-Qwen-7B | 38.72 ± 3.56 | 1975.19 ± 8.90 |
+| GPQA Diamond | Hawkeye | 39.23 ± 3.10 | 2006.30 ± 2.23 |
+| MATH | DeepSeek-R1-Distill-Qwen-7B | 91.47 | 751.5 |
+| MATH | Hawkeye | 87.45 | 208.33 |
 
 
+## Acknowledge
 
-## Features
 
-- 🧠 Focused on efficiency and scalability.
-- 📊 Benchmarking multiple state-of-the-art models.
-- 🛠️ Modular and extensible design for evaluation pipelines.
+If you find Hawkeye helpful in your work, we're happy if you cite:
 
----
+```bibtex
+@article{she2025hawkeye,
+  title={Hawkeye: Efficient reasoning with model collaboration},
+  author={She, Jianshu and Li, Zhuohao and Huang, Zhemin and Li, Qi and Xu, Peiran and Li, Haonan and Ho, Qirong},
+  journal={arXiv preprint arXiv:2504.00424},
+  year={2025}
+}
+```
 
-## Progress Tracker
 
-### Model Evaluations
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-- [x] Qwen evaluation  
-- [ ] Llama 3 evaluation *(in progress)*  
 
-### Tasks
-
-- [x] Implement data preprocessing  
-- [ ] Optimize inference speed *(coming soon)*  
-
-### Documentation
-
-- [x] Initial README  
-- [ ] Add user guide  
-
----
-
-## How to Use
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/Jianshu1only/Efficient_CoT.git
-
-# Instruction Decoding benchmark
-
-## GSM8K Subset (138 Questions, Simplified CoT : 30 tokens, Hint CoT : 10 tokens)
-
-### Qwen-0.5B GSM8K Evaluation Results
-
-This table summarizes the evaluation results of the Qwen-0.5B model on the GSM8K dataset under different configurations:
-
-| Configuration              | Match Count | Total Count | Accuracy (%) |
-|----------------------------|-------------|-------------|--------------|
-| Baseline (no system prompt) | 38          | 138         | 27.54        |
-| Baseline (with system prompt) | 45         | 138         | 32.61        |
-| Instruction (no system prompt) | 82        | 138         | 59.42        |
-| Instruction (with system prompt) | 86       | 138         | 62.32        |
-| Instruction (with system prompt/ simplified) | 68       | 138         | 49.28       |
-| Instruction (with system prompt/ hint) | 50      | 138         | 36.24        |
-
----
-
-### Llama3-1B GSM8K Evaluation Results
-
-| Configuration              | Match Count | Total Count | Accuracy (%) |
-|----------------------------|-------------|-------------|--------------|
-| Baseline (with system prompt) | 4         | 138         | 2.90       |
-| Instruction (with system prompt) | 63       | 138         | 45.65        |
-| Instruction (with system prompt/ simplified) | 55      | 138         | 39.86      |
-
----
-
-### Compressed CoT
-
-![Performance Chart](output.png)
+**⭐ Star this repository if you find it helpful!**
