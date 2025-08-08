@@ -3,7 +3,7 @@
 [![Paper](https://img.shields.io/badge/Paper-PDF-red)](https://arxiv.org/abs/2504.00424)
 [![Code](https://img.shields.io/badge/Code-GitHub-blue)](https://github.com/Jianshu1only/Efficient_CoT)
 [![Model](https://img.shields.io/badge/Model-HuggingFace-green)](https://huggingface.co/Jianshu001/Efficient_CoT_DeepSeek-R1-Distill-Qwen-7B)
-[![Project](https://img.shields.io/badge/Project-Website-orange)](https://zhuohao-li.github.io/hawkeye)
+[![Project](https://img.shields.io/badge/Project-Website-orange)](https://zhuohao-li.github.io/Hawkeye)
 
 ## 📖 Overview
 
