@@ -1,0 +1,25 @@
+/* Simplified FontAwesome CSS */
+.fas, .fab, .far {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+.fab {
+  font-weight: 400;
+}
+
+.far {
+  font-weight: 400;
+}
+
+.fa-file-pdf:before {
+  content: "\f1c1";
+}
+
+.fa-github:before {
+  content: "\f09b";
+}
+
+.fa-brain:before {
+  content: "\f5dc";
+} 

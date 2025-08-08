@@ -1,0 +1,13 @@
+/* Simplified carousel CSS */
+.carousel {
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-item {
+  display: none;
+}
+
+.carousel-item.is-active {
+  display: block;
+} 

@@ -1,0 +1,18 @@
+/* Simplified slider CSS */
+.slider {
+  position: relative;
+}
+
+.slider-track {
+  position: relative;
+  height: 4px;
+  background: #dbdbdb;
+  border-radius: 2px;
+}
+
+.slider-fill {
+  position: absolute;
+  height: 100%;
+  background: #3273dc;
+  border-radius: 2px;
+} 
