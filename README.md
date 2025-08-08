@@ -1,41 +1,28 @@
+# Hawkeye: Model Collaboration for Efficient Reasoning (COLM'25)
 
-# TODO List
-
-- [ ] Task 1: Literature Review (CoT Compression, redundancy, Agent System（Large model as Commander, small model as Executor）) (by Muqi)
-- [ ] Task 2: New Evaluation script (by Zhemin)
-- [ ] Task 3: Paper story outline (by Jianshu/Zhuohao)
-- [ ] Task 4: Github Webpage
-- [ ] Task 5: Release our own benchmark
-- [x] Task 6: Upload Model to HuggingFace
-
-## Evaluation Task (Accuracy/Responese Length/Throughtput)
-
-- [x] GSM8K (Muqi):
-- [ ] MATH-500 (Zhemin):
-- [ ] MQA (Pending):
-- [x] GPQA Diamond (Muqi):
-- [X] AIME 2024 (Zhuohao):
-- [x] MATH (Jianshu):
-
-| Task              | Evaluator | Model                                      | Accuracy(%) | Response Length | Throughput |
-|------------------|-----------|--------------------------------------------|----------|----------------|------------|
-| GSM8K           | Muqi     | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |     85.65 $\pm$ 0.63  |      477.98 $\pm$ 0.89(Tokens)          |          |
-|                |           | Efficient CoT                              |     82.11 $\pm$ 0.48    |   413.42 $\pm$ 2.19(Tokens)        |            |
-| MATH-500       | Zhemin    | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |          |                |            |
-|                |           | Efficient CoT                              |          |                |            |
-| MQA            | Pending   | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |          |                |            |
-|                |           | Efficient CoT                              |          |                |            |
-| GPQA Diamond   | Muqi      | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |   38.72 $\pm$ 3.56 |        1975.19 $\pm$ 8.90 (Tokens)        |            |
-|                |           | Efficient CoT                              |  39.23 $\pm$ 3.10    |       2006.30 $\pm$ 2.23 (Tokens)        |            |
-| AIME 2024      | Zhuohao   | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |          |                |            |
-|                |           | Efficient CoT                                    |          |                |            |
-| MATH           | Jianshu   | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |     91.47     |         751.5(Tokens)       |            |
-|                |           | Efficient CoT                                  |     87.45     |       208.33(Tokens)         |            |
-
-# Efficient_CoT
 
 This is the repository for the **Efficient_CoT** project.  
 It aims to provide efficient and structured implementations for chain-of-thought reasoning in AI models.
+
+## Evaluation Task (Accuracy/Responese Length/Throughtput)
+
+
+| Task              | Model                                      | Accuracy(%) | Response Length | Throughput |
+|------------------|--------------------------------------------|----------|----------------|------------|
+| GSM8K           | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |     85.65 $\pm$ 0.63  |      477.98 $\pm$ 0.89(Tokens)          |          |
+|                | Efficient CoT                              |     82.11 $\pm$ 0.48    |   413.42 $\pm$ 2.19(Tokens)        |            |
+| MATH-500       | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |          |                |            |
+|                | Efficient CoT                              |          |                |            |
+| MQA            | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |          |                |            |
+|                | Efficient CoT                              |          |                |            |
+| GPQA Diamond   | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |   38.72 $\pm$ 3.56 |        1975.19 $\pm$ 8.90 (Tokens)        |            |
+|                | Efficient CoT                              |  39.23 $\pm$ 3.10    |       2006.30 $\pm$ 2.23 (Tokens)        |            |
+| AIME 2024      | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |          |                |            |
+|                | Efficient CoT                                    |          |                |            |
+| MATH           | deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    |     91.47     |         751.5(Tokens)       |            |
+|                | Efficient CoT                                  |     87.45     |       208.33(Tokens)         |            |
+
+
 
 ## Features
 
