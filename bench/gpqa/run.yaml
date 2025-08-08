@@ -1,0 +1,22 @@
+seed: 42
+
+
+# stage 1: using 'cot_model_path' model generate cot
+# stage 2: run eval on small models depending on the generated cot
+# stage 3: baseline model run
+stage: 3
+
+n_repeat: 3
+# baseline_math_path: 
+cot_model_path: Jianshu001/Efficient_CoT_DeepSeek-R1-Distill-Qwen-7B
+small_model_path: Qwen/Qwen2.5-0.5B-Instruct
+
+# base_model_path: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+base_model_path: Jianshu001/Efficient_CoT_DeepSeek-R1-Distill-Qwen-7B
+# base_model_path: Qwen/Qwen2.5-7B-Instruct
+
+batch_size: 12
+dp_size: 1
+tp_size: 4
+
+data_name: gpqa_diamond

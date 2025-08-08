@@ -1,0 +1,57 @@
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+
+Question: Sasha notices that prices for lumber have gone up 50% in the last few months after she bought some lumber. Since she has leftovers, she decides to sell them. She has leftover ten 2 x 4 x 10 boards that cost her $10 each. She also has five 4 x 4 x 10 boards she bought for $16 each. If she sells them all, how much profit does she make?
+<|im_end|>
+<|im_start|>assistant
+To determine Sasha's profit, we need to calculate the total cost of the lumber she bought and the total revenue from selling it, then find the difference between the revenue and the cost.
+
+First, let's calculate the total cost of the lumber Sasha bought:
+
+1. **Cost of 2x4x10 boards:**
+   - Each board costs $10.
+   - She has 10 boards.
+   - Total cost for 2x4x10 boards: \( 10 \text{ boards} \times \$10/\text{board} = \$100 \).
+
+2. **Cost of 4x4x10 boards:**
+   - Each board costs $16.
+   - She has 5 boards.
+   - Total cost for 4x4x10 boards: \( 5 \text{ boards} \times \$16/\text{board} = \$80 \).
+
+3. **Total cost of all lumber:**
+   - Total cost = Cost of 2x4x10 boards + Cost of 4x4x10 boards
+   - Total cost = \$100 + \$80 = \$180.
+
+Next, let's calculate the total revenue from selling the lumber:
+
+1. **Revenue from 2x4x10 boards:**
+   - Assume she sells each board for the same price she bought it for, which is $10.
+   - She has 10 boards.
+   - Total revenue for 2x4x10 boards: \( 10 \text{ boards} \times \$10/\text{board} = \$100 \).
+
+2. **Revenue from 4x4x10 boards:**
+   - Assume she sells each board for the same price she bought it for, which is $16.
+   - She has 5 boards.
+   - Total revenue for 4x4x10 boards: \( 5 \text{ boards} \times \$16/\text{board} = \$80 \).
+
+3. **Total revenue from all lumber:**
+   - Total revenue = Revenue from 2x4x10 boards + Revenue from 4x4x10 boards
+   - Total revenue = \$100 + \$80 = \$180.
+
+Finally, let's calculate the profit:
+
+1. **Profit:**
+   - Profit = Total revenue - Total cost
+<|im_end|>
+<|im_start|>user
+Please provide the answer directly.<|im_end|>
+<|im_start|>assistant
+Answer: 0
+
+Sasha's total revenue from selling the lumber is \$180<|im_end|>
+>
+<|im_start|>assistant
+Answer: 45 miles
+
+John was 180 miles away from home when he<|im_end|>

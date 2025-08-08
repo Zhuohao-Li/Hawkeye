@@ -1,0 +1,13 @@
+# data args
+seed: 42
+data_name: "gsm8k"
+num_proc: 8
+
+# parse output args
+max_try_times: 3
+
+# output_path
+output_path: "gsm8k_cot.jsonl"
+
+# runtime mode
+test: False

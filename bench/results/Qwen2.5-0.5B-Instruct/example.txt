@@ -1,0 +1,70 @@
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+
+Question: Melanie is a door-to-door saleswoman. She sold a third of her vacuum cleaners at the green house, 2 more to the red house, and half of what was left at the orange house. If Melanie has 5 vacuum cleaners left, how many did she start with?
+<|im_end|>
+<|im_start|>assistant
+Let's denote the total number of vacuum cleaners Melanie started with as \( x \).
+
+1. Melanie sold a third of her vacuum cleaners at the green house. So, she sold \( \frac{x}{3} \) vacuum cleaners at the green house.
+2. She sold 2 more vacuum cleaners at the red house, so she sold \( \frac{x}{3} + 2 \) vacuum cleaners at the red house.
+3. She sold half of what was left at the orange house. So, she sold \( \frac{1}{2} \left( \frac{x}{3} + 2 \right) \) vacuum cleaners at the orange house.
+
+After selling these, Melanie has 5 vacuum cleaners left. Therefore, the total number of vacuum cleaners she started with is the sum of the vacuum cleaners she sold and the vacuum cleaners she has left:
+
+\[ x = \frac{x}{3} + 2 + \frac{1}{2} \left( \frac{x}{3} + 2 \right) + 5 \]
+
+Let's simplify this equation step by step:
+
+First, distribute the 2 in the second term:
+
+\[ x = \frac{x}{3} + 2 + \frac{1}{2} \cdot \frac{x}{3} + \frac{1}{2} \cdot 2 + 5 \]
+
+\[ x = \frac{x}{3} + 2 + \frac{x}{6} + 1 + 5 \]
+
+Combine like terms:
+
+\[ x = \frac{x}{3} + \frac{x}{6} + 2 + 1 + 5 \]
+
+\[ x = \frac{2x}{6} + \frac{x}{6} + 8 \]
+
+\[ x = \frac{3x}{6} + \frac{8}{6} \]
+
+\[ x = \frac{3x + 8}{6} \]
+
+Multiply both sides by 6 to clear the fraction:
+
+\[ 6x = 3x + 8 \]
+
+Subtract \( 3x \) from both sides:
+
+\[ 3x = 8 \]
+
+Divide both sides by 3:
+
+\[ x = \frac{8}{3} \]
+
+So, Melanie started with \( \frac{8}{3} \) vacuum cleaners, which is approximately 2.67. However, since the number of vacuum cleaners must be a whole number, we can conclude that Melanie<|im_end|>
+<|im_start|>user
+Please provide the answer directly.<|im_end|>
+<|im_start|>assistant
+Answer: 2.67 vacuum cleaners.<|im_end|>
+eels. Let's re-evaluate the problem.
+
+The correct equation should be:
+
+\[ B + 71 = B - 5 \]
+
+Solving for \( B \):
+
+\[ 71 + 5 =<|im_end|>
+<|im_start|>user
+Please provide the answer directly.<|im_end|>
+<|im_start|>assistant
+Answer: 76<|im_end|>
+ched on Wednesday is \(\boxed{4}\).<|im_end|>
+<|im_start|>user
+Please provide the answer directly.<|im_end|>
+<|im_start|>assistant
+Answer: 4<|im_end|>

@@ -1,0 +1,8 @@
+{
+    "seed": 42,
+    "model_name_or_path": "Qwen/Qwen2.5-7B-Instruct",
+    "cot": false,
+    "batch_size": 128,
+    "max_new_tokens": 512,
+    "first": false
+}

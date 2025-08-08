@@ -1,0 +1,36 @@
+<|start_header_id|>user<|end_header_id|>
+
+
+Question: If Marcy works for the same company for 40 years, she gets an annual pension of $50,000/year. Starting after 20 years, she becomes entitled to 5% of the value of the pension per year. If she quits after 30 years, what will her annual pension be?
+<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To solve this problem, we need to calculate the total value of the pension and then determine the annual pension amount after 30 years.
+
+Initially, Marcy receives an annual pension of $50,000 for 20 years. The total value of this pension is:
+
+$50,000/year x 20 years = $1,000,000
+
+After 20 years, she becomes entitled to 5% of the value of the pension per year. This means that the annual pension amount will increase by 5% of the initial pension amount each year.
+
+Let's calculate the annual pension amount after 20 years:
+
+Year 21: $50,000 + (5% of $50,000) = $50,000 + $2,500 = $52,500
+Year 22: $52,500 + (5% of $52,500) = $52,500 + $2,625 = $55,125
+Year 23: $55,125 + (5% of $55,125) = $55,125 + $2,756.25 = $57,881.25
+Year 24: $57,881.25 + (5% of $57,881.25) = $57,881.25 + $2,939.06 = $60,820.31
+Year 25: $60,820.31 + (5% of $60,820.31) = $60,820.31 + $3,041.01 = $63,861.32
+Year 26: $63,861.32 + (5% of $63,861.32) = $63,861.32 + $3,192.56 = $67,053.88
+Year 27: $67,053.88 + (5% of $67,053.88) = $67,053.88 + $3,350.79 = $70,404.67
+Year 28: $70,404.67 + (5% of $70,404.67) = $70,404.67 + $3,520.23 = $73,924.90
+Year 29: $73,924.90 + (5% of $73,924.90) = $73,924.90 + $3,697.24 = $77,622.14
+Year 30: $77,622.14 + (5% of $77,<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Please provide the answer directly.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Answer:  $77,622.14 + (5% of $77,622.<|eot_id|>e difference between the total selling price and the total cost. So, the profit is $270 - $180 = $90.
+
+The final answer is: $\boxed{90}$<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Please provide the answer directly.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Answer: 90<|eot_id|>
