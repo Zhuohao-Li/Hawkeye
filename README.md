@@ -3,14 +3,15 @@
 [![Paper](https://img.shields.io/badge/Paper-PDF-red)](https://arxiv.org/abs/2504.00424)
 [![Code](https://img.shields.io/badge/Code-GitHub-blue)](https://github.com/Jianshu1only/Efficient_CoT)
 [![Model](https://img.shields.io/badge/Model-HuggingFace-green)](https://huggingface.co/Jianshu001/Efficient_CoT_DeepSeek-R1-Distill-Qwen-7B)
+[![Project](https://img.shields.io/badge/Project-Website-orange)](https://zhuohao-li@github.io/hawkeye)
 
 ## 📖 Overview
 
 **Hawkeye** is an efficient reasoning framework with **Model Collaboration**, where a large model produces concise instructions to guide a lightweight model in response preparation and generation. Hawkeye quantifies redundancy in LRM and distills high-density information via RLHF.
 
-![Methodology](Efficient_Chain_of_Thought/figure/methodology.png)
+![Methodology](docs/figure/methodology.png)
 
-![Example](Efficient_Chain_of_Thought/figure/example3.png)
+![Example](docs/figure/example3.png)
 
 ## 🎯 Key Features
 
@@ -19,7 +20,6 @@
 - **⚡ Speed**: Accelerates end-to-end reasoning by up to 3.4×
 - **🎯 Quality**: Maintains comparable response quality while improving clarity and coherence
 - **🔧 Flexibility**: Supports various model combinations and system prompts
-
 
 ## 🚀 Quick Start
 
@@ -89,13 +89,13 @@ Hawkeye introduces **model collaboration**, wherein a powerful model generates c
 
 Hawkeye achieves comparable accuracy to baseline models while significantly reducing computational cost:
 
-![Accuracy Comparison](Efficient_Chain_of_Thought/figure/acc_comp.png)
+![Accuracy Comparison](docs/figure/acc_comp.png)
 
 ### Cost Efficiency
 
 Hawkeye reduces inference cost by up to 60% while maintaining performance. Our evaluation shows that Hawkeye can achieve comparable response quality using only 35% of the full CoTs
 
-![Performance](Efficient_Chain_of_Thought/figure/comparasion.png)
+![Performance](docs/figure/comparasion.png)
 
 ## 🔬 Methodology
 
@@ -106,13 +106,13 @@ We observe that CoT reasoning often contains substantial redundancy due to:
 2. **Filler phrases** (e.g., "Well," "Let me double-check")
 3. **Overly fine-grained steps**
 
-![Redundancy Analysis](Efficient_Chain_of_Thought/figure/redundancy.png)
+![Redundancy Analysis](docs/figure/redundancy.png)
 
 ### GRPO
 
 Hawkeye employs GRPO (Group Relative Policy Optimization) to fine-tune models for compressed CoT generation:
 
-![GRPO Training](Efficient_Chain_of_Thought/figure/GRPO.png)
+![GRPO Training](docs/figure/GRPO.png)
 
 The reward function is designed as:
 ```
@@ -153,8 +153,6 @@ If you find Hawkeye helpful in your work, we're happy if you cite:
 }
 ```
 
-
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
-
 
 **⭐ Star this repository if you find it helpful!**
