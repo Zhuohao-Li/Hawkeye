@@ -9,7 +9,9 @@
 
 **Hawkeye** is an efficient reasoning framework with **Model Collaboration**, where a large model produces concise instructions to guide a lightweight model in response preparation and generation. Hawkeye quantifies redundancy in LRM and distills high-density information via RLHF.
 
-![Methodology](docs/figure/methodology.png)
+<p align="center">
+  <img src="docs/figure/methodology.png" width="70%">
+</p>
 
 ![Example](docs/figure/example3.png)
 
@@ -112,7 +114,11 @@ We observe that CoT reasoning often contains substantial redundancy due to:
 
 Hawkeye employs GRPO (Group Relative Policy Optimization) to fine-tune models for compressed CoT generation:
 
-![GRPO Training](docs/figure/GRPO.png)
+<div align="center">
+  <img src="docs/figure/GRPO.png" width="45%" style="display: inline-block; margin-right: 5%">
+  <img src="docs/figure/grpo2.png" width="45%" style="display: inline-block">
+</div>
+
 
 The reward function is designed as:
 ```
