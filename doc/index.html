@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficient_CoT: Efficient Chain-of-Thought Reasoning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .badges {
+            margin-top: 30px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+
+        main {
+            padding: 60px 0;
+        }
+
+        .section {
+            background: white;
+            margin: 30px 0;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #34495e;
+            font-size: 1.5rem;
+            margin: 25px 0 15px 0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .results-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .results-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .results-table tr:hover {
+            background: #e3f2fd;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .methodology {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .methodology h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .methodology ol {
+            padding-left: 20px;
+        }
+
+        .methodology li {
+            margin: 8px 0;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+        }
+
+        .performance-chart {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .performance-chart img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .cta h3 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin: 10px 0;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Efficient_CoT</h1>
+                <p>Efficient Chain-of-Thought Reasoning for AI Models</p>
+                <div class="badges">
+                    <span class="badge">🧠 Chain-of-Thought</span>
+                    <span class="badge">📊 Benchmarking</span>
+                    <span class="badge">⚡ Efficiency</span>
+                    <span class="badge">🔬 Research</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2>About the Project</h2>
+            <p>Efficient_CoT is a research project focused on developing efficient and structured implementations for chain-of-thought reasoning in AI models. Our work aims to optimize the reasoning process while maintaining high accuracy across multiple benchmarks.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <h4>🧠 Focused on Efficiency</h4>
+                    <p>Optimized chain-of-thought reasoning with reduced token usage while maintaining performance.</p>
+                </div>
+                <div class="feature">
+                    <h4>📊 Comprehensive Benchmarking</h4>
+                    <p>Evaluation across multiple state-of-the-art models including Qwen, Llama, and DeepSeek.</p>
+                </div>
+                <div class="feature">
+                    <h4>🛠️ Modular Design</h4>
+                    <p>Extensible evaluation pipelines for easy integration with new models and datasets.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Research Methodology</h2>
+            
+            <div class="methodology">
+                <h4>Two-Turn Conversation Evaluation</h4>
+                <ol>
+                    <li><strong>First Turn:</strong> Prompt the model to "think" and provide a reasoning process along with an answer</li>
+                    <li><strong>Second Turn:</strong> Directly ask the model for the final answer without additional reasoning</li>
+                </ol>
+            </div>
+
+            <div class="methodology">
+                <h4>Chain-of-Thought Generation</h4>
+                <p>Our CoT generation process utilizes GPT-4o to create detailed and coherent reasoning chains:</p>
+                <div class="code-block">
+                    <pre>gen_cot_template = """
+Based on the provided question: {question}, generate a detailed and coherent chain of thought to guide the process of solving this question efficiently and effectively. 
+
+Requirements:
+1. The chain of thought must focus solely on the reasoning process and step-by-step approach, avoiding any immediate answers.
+2. Express the chain of thought as a numbered list using the format:
+   1. ...
+   2. ...
+   3. ...
+   
+Return the output in the following JSON format:
+```json
+{
+    "chain_of_thought": "..."
+}
+```
+"""</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Evaluation Results</h2>
+            
+            <h3>GSM8K Benchmark Results</h3>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>CoT (Accuracy)</th>
+                        <th>No-CoT (Accuracy)</th>
+                        <th>Difference (CoT - No-CoT)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Qwen2.5-7B-Instruct</td>
+                        <td>88.93%</td>
+                        <td>89.16%</td>
+                        <td>-0.23%</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2.5-3B-Instruct</td>
+                        <td>84.38%</td>
+                        <td>77.18%</td>
+                        <td>+7.20%</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2.5-1.5B-Instruct</td>
+                        <td>83.85%</td>
+                        <td>72.10%</td>
+                        <td>+11.75%</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2.5-0.5B-Instruct</td>
+                        <td>70.43%</td>
+                        <td>47.76%</td>
+                        <td>+22.67%</td>
+                    </tr>
+                    <tr>
+                        <td>Llama-3.1-8B-Instruct</td>
+                        <td>90.52%</td>
+                        <td>85.90%</td>
+                        <td>+4.62%</td>
+                    </tr>
+                    <tr>
+                        <td>Llama-3.2-3B-Instruct</td>
+                        <td>89.01%</td>
+                        <td>77.41%</td>
+                        <td>+11.60%</td>
+                    </tr>
+                    <tr>
+                        <td>Llama-3.2-1B-Instruct</td>
+                        <td>75.13%</td>
+                        <td>55.19%</td>
+                        <td>+19.94%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Multi-Dataset Evaluation</h3>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Evaluator</th>
+                        <th>Model</th>
+                        <th>Accuracy(%)</th>
+                        <th>Response Length (Tokens)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GSM8K</td>
+                        <td>Muqi</td>
+                        <td>DeepSeek-R1-Distill-Qwen-7B</td>
+                        <td>85.65 ± 0.63</td>
+                        <td>477.98 ± 0.89</td>
+                    </tr>
+                    <tr>
+                        <td>GSM8K</td>
+                        <td>Muqi</td>
+                        <td>Efficient CoT</td>
+                        <td>82.11 ± 0.48</td>
+                        <td>413.42 ± 2.19</td>
+                    </tr>
+                    <tr>
+                        <td>GPQA Diamond</td>
+                        <td>Muqi</td>
+                        <td>DeepSeek-R1-Distill-Qwen-7B</td>
+                        <td>38.72 ± 3.56</td>
+                        <td>1975.19 ± 8.90</td>
+                    </tr>
+                    <tr>
+                        <td>GPQA Diamond</td>
+                        <td>Muqi</td>
+                        <td>Efficient CoT</td>
+                        <td>39.23 ± 3.10</td>
+                        <td>2006.30 ± 2.23</td>
+                    </tr>
+                    <tr>
+                        <td>MATH</td>
+                        <td>Jianshu</td>
+                        <td>DeepSeek-R1-Distill-Qwen-7B</td>
+                        <td>91.47</td>
+                        <td>751.5</td>
+                    </tr>
+                    <tr>
+                        <td>MATH</td>
+                        <td>Jianshu</td>
+                        <td>Efficient CoT</td>
+                        <td>87.45</td>
+                        <td>208.33</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>Instruction Decoding Benchmark</h2>
+            
+            <h3>Qwen-0.5B GSM8K Evaluation Results</h3>
+            <p>Evaluation on 138 questions with different configurations:</p>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Configuration</th>
+                        <th>Match Count</th>
+                        <th>Total Count</th>
+                        <th>Accuracy (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Baseline (no system prompt)</td>
+                        <td>38</td>
+                        <td>138</td>
+                        <td>27.54</td>
+                    </tr>
+                    <tr>
+                        <td>Baseline (with system prompt)</td>
+                        <td>45</td>
+                        <td>138</td>
+                        <td>32.61</td>
+                    </tr>
+                    <tr>
+                        <td>Instruction (no system prompt)</td>
+                        <td>82</td>
+                        <td>138</td>
+                        <td>59.42</td>
+                    </tr>
+                    <tr>
+                        <td>Instruction (with system prompt)</td>
+                        <td>86</td>
+                        <td>138</td>
+                        <td>62.32</td>
+                    </tr>
+                    <tr>
+                        <td>Instruction (with system prompt/ simplified)</td>
+                        <td>68</td>
+                        <td>138</td>
+                        <td>49.28</td>
+                    </tr>
+                    <tr>
+                        <td>Instruction (with system prompt/ hint)</td>
+                        <td>50</td>
+                        <td>138</td>
+                        <td>36.24</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Llama3-1B GSM8K Evaluation Results</h3>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Configuration</th>
+                        <th>Match Count</th>
+                        <th>Total Count</th>
+                        <th>Accuracy (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Baseline (with system prompt)</td>
+                        <td>4</td>
+                        <td>138</td>
+                        <td>2.90</td>
+                    </tr>
+                    <tr>
+                        <td>Instruction (with system prompt)</td>
+                        <td>63</td>
+                        <td>138</td>
+                        <td>45.65</td>
+                    </tr>
+                    <tr>
+                        <td>Instruction (with system prompt/ simplified)</td>
+                        <td>55</td>
+                        <td>138</td>
+                        <td>39.86</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>Performance Analysis</h2>
+            
+            <div class="highlight">
+                <h3>Key Findings</h3>
+                <ul>
+                    <li><strong>Efficiency Gains:</strong> Our Efficient CoT approach shows significant token reduction while maintaining competitive accuracy</li>
+                    <li><strong>Model Scaling:</strong> Smaller models benefit more from CoT reasoning, with improvements up to 22.67% for Qwen2.5-0.5B</li>
+                    <li><strong>Consistent Performance:</strong> Across multiple datasets, our approach demonstrates robust performance</li>
+                    <li><strong>Instruction Effectiveness:</strong> Proper instruction prompting significantly improves model performance</li>
+                </ul>
+            </div>
+
+            <div class="performance-chart">
+                <h3>Compressed CoT Performance</h3>
+                <img src="../output.png" alt="Performance Chart" style="max-width: 100%; height: auto;">
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Getting Started</h2>
+            
+            <div class="methodology">
+                <h4>Quick Start</h4>
+                <ol>
+                    <li>Clone the repository: <code>git clone https://github.com/Jianshu1only/Efficient_CoT.git</code></li>
+                    <li>Install dependencies: <code>pip install -r requirements.txt</code></li>
+                    <li>Run evaluation: <code>python evaluation/evaluation.py --model_path Qwen/Qwen1.5-7B --test_file test.jsonl --eval_mode joint</code></li>
+                </ol>
+            </div>
+
+            <div class="methodology">
+                <h4>Benchmark Evaluation</h4>
+                <p>For GSM8K evaluation:</p>
+                <div class="code-block">
+                    <pre>python bench/gsm8k_evaluate_cot.py --model_path your_model_path --test_file gsm8k_cot.jsonl</pre>
+                </div>
+            </div>
+        </section>
+
+        <div class="cta">
+            <h3>Ready to Explore Efficient Chain-of-Thought Reasoning?</h3>
+            <p>Join us in advancing the state-of-the-art in AI reasoning efficiency</p>
+            <a href="https://github.com/Jianshu1only/Efficient_CoT" class="btn">View on GitHub</a>
+            <a href="https://github.com/Jianshu1only/Efficient_CoT/issues" class="btn">Report Issues</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p><strong>Efficient_CoT</strong> - Efficient Chain-of-Thought Reasoning for AI Models</p>
+                <p>Research project focused on optimizing reasoning processes in large language models</p>
+                <p>© 2024 Efficient_CoT Team. Apache License 2.0</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
