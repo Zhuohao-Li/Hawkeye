@@ -4,6 +4,7 @@
 [![Code](https://img.shields.io/badge/Code-GitHub-blue)](https://github.com/Jianshu1only/Efficient_CoT)
 [![Model](https://img.shields.io/badge/Model-HuggingFace-green)](https://huggingface.co/Jianshu001/Efficient_CoT_DeepSeek-R1-Distill-Qwen-7B)
 [![Project](https://img.shields.io/badge/Project-Website-orange)](https://zhuohao-li.github.io/Hawkeye)
+[![Poster(COLM)](https://img.shields.io/badge/Poster-Website-orange)](/assets/poster.pdf)
 
 ## 📖 Overview
 
