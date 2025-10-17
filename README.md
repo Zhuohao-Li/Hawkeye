@@ -65,14 +65,16 @@ python bench/math_evaluate_cot.py --model_path your_model_path --test_file math_
 
 ```
 Hawkeye/
-├── bench/                    # Benchmark evaluation scripts
+├── benchmark/                    # Benchmark evaluation scripts
 │   ├── gsm8k_evaluate_cot.py
 │   ├── math_evaluate_cot.py
 │   └── results/             # Evaluation results
 ├── evaluation/              # Model evaluation utilities
-├── finetune/               # Fine-tuning scripts
-├── model/                  # Model configurations
+├── hawkeye/                # core code
+│   ├── finetune/               # Fine-tuning scripts
+│   ├── model/                  # Model configurations
 ├── docs/                   # Documentation and website
+├── assets/
 ```
 
 ## 🏗️ Architecture
